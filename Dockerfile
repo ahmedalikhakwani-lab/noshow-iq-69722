@@ -33,8 +33,8 @@ RUN chown -R appuser:appgroup /app
 USER appuser
 
 # Hugging Face Spaces uses port 7860; docker-compose local uses 8000
-ENV PORT=8000
-EXPOSE 8000
+ENV PORT=7860
+EXPOSE 7860
 
 # MONGO_URI is injected at runtime — never hardcoded here
 CMD ["sh", "-c", "uvicorn noshow_iq.api:app --host 0.0.0.0 --port ${PORT}"]
