@@ -29,6 +29,9 @@ COPY main.py    ./main.py
 # COPY noshow_model.joblib      ./noshow_model.joblib
 # COPY neighbourhood_map.joblib ./neighbourhood_map.joblib
 
+COPY noshow_model.joblib ./noshow_model.joblib
+COPY neighbourhood_map.joblib ./neighbourhood_map.joblib
+
 RUN chown -R appuser:appgroup /app
 USER appuser
 
