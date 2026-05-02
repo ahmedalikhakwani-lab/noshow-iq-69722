@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "noshow-iq"
+version = "0.1.0"
+description = "Predict patient no-shows for clinic appointments."
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "fastapi>=0.111",
+    "uvicorn[standard]>=0.29",
+    "pymongo>=4.7",
+    "scikit-learn>=1.4",
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "joblib>=1.4",
+    "pydantic>=2.7",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["noshow_iq*"]

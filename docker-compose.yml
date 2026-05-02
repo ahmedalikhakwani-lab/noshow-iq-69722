@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      MONGO_URI: mongodb://mongo:27017   # never hardcoded — injected here
+      MODEL_PATH: /app/noshow_model.joblib
+      NEIGHBOURHOOD_MAP_PATH: /app/neighbourhood_map.joblib
+    volumes:
+      # Mount the trained model files so the container picks them up
+      - ./noshow_model.joblib:/app/noshow_model.joblib:ro
+      - ./neighbourhood_map.joblib:/app/neighbourhood_map.joblib:ro
+    depends_on:
+      - mongo
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+
+  mongo-express:
+    image: mongo-express:1
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_PORT:   27017
+      ME_CONFIG_BASICAUTH:      "false"   # open for local dev — lock down in prod
+    depends_on:
+      - mongo
+    restart: unless-stopped
+
+volumes:
+  mongo_data:
