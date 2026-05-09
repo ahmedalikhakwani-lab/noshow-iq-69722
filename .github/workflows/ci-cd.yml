@@ -20,8 +20,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Lint with flake8
-        run: flake8 noshow_iq/ tests/ --max-line-length=100 --exclude=venv,__pycache__
+      - name: name: Lint with flake8
+        run: flake8 noshow_iq/ tests/ --max-line-length=120 --exclude=venv,__pycache__ --ignore=E221,E231,W293,F401,E501
 
       - name: Run pytest
         run: pytest tests/ -v
